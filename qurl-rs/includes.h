@@ -16,6 +16,12 @@
 
 /* PROTOTYPES */
 
+// Request datatype
+struct Request {
+    char* request;
+    char* response;
+};
+
 // Widgets
 class TargetBoxWidget : public QWidget
 {
@@ -24,6 +30,21 @@ class TargetBoxWidget : public QWidget
 public:
     TargetBoxWidget();
     ~TargetBoxWidget();
+    std::string get();
+
+private:
+    QLabel *label;
+    QLineEdit *box;
+    QHBoxLayout *layout;
+};
+
+class UserAgentBoxWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    UserAgentBoxWidget();
+    ~UserAgentBoxWidget();
     std::string get();
 
 private:
@@ -55,6 +76,7 @@ public:
     HeadersBoxWidget();
     ~HeadersBoxWidget();
     bool get();
+    void set(bool b);
 
 private:
     QLabel *label;
@@ -114,6 +136,7 @@ private:
     QPushButton *buttonClear;
 
     TargetBoxWidget *target;
+    UserAgentBoxWidget *agent;
     MethodBoxWidget *method;
     HeadersBoxWidget *headers;
 
@@ -121,7 +144,7 @@ private:
     ResponseBoxWidget *response;
 };
 
-// Network
-std::string curlRequest(std::string method, std::string target, std::string content);
+// Parsing
+std::string parse(std::string str);
 
 #endif // INCLUDES_H

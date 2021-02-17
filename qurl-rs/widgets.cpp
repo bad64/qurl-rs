@@ -2,7 +2,7 @@
 
 TargetBoxWidget::TargetBoxWidget()
 {
-    label = new QLabel("Target");
+    label = new QLabel("Target:");
     box = new QLineEdit();
     layout = new QHBoxLayout();
 
@@ -18,12 +18,33 @@ std::string TargetBoxWidget::get()
     return box->text().toStdString();
 }
 
+UserAgentBoxWidget::UserAgentBoxWidget()
+{
+    label = new QLabel("User-Agent:");
+    box = new QLineEdit();
+    layout = new QHBoxLayout();
+
+    layout->addWidget(label);
+    layout->addWidget(box);
+
+    setLayout(layout);
+}
+UserAgentBoxWidget::~UserAgentBoxWidget()
+{}
+std::string UserAgentBoxWidget::get()
+{
+    return box->text().toStdString();
+}
+
 MethodBoxWidget::MethodBoxWidget()
 {
-    label = new QLabel("Method");
+    label = new QLabel("Method:");
     box = new QComboBox();
     box->addItem("GET");
     box->addItem("POST");
+    box->addItem("PUT");
+    box->addItem("DELETE");
+    box->addItem("HEAD");
     layout = new QHBoxLayout();
 
     layout->addWidget(label);
@@ -40,7 +61,7 @@ std::string MethodBoxWidget::get()
 
 HeadersBoxWidget::HeadersBoxWidget()
 {
-    label = new QLabel("With headers");
+    label = new QLabel("With headers:");
     box = new QCheckBox();
     layout = new QHBoxLayout();
 
@@ -55,10 +76,14 @@ bool HeadersBoxWidget::get()
 {
     return box->isChecked();
 }
+void HeadersBoxWidget::set(bool b)
+{
+    box->setCheckState(Qt::CheckState(b));
+}
 
 RequestBoxWidget::RequestBoxWidget()
 {
-    group = new QGroupBox("Request body");
+    group = new QGroupBox("Request body:");
     text = new QPlainTextEdit();
     layout = new QVBoxLayout();
 
@@ -78,7 +103,7 @@ std::string RequestBoxWidget::get()
 
 ResponseBoxWidget::ResponseBoxWidget()
 {
-    group = new QGroupBox("Response");
+    group = new QGroupBox("Response:");
     text = new QPlainTextEdit();
     text->setReadOnly(true);
     text->setLineWrapMode(QPlainTextEdit::NoWrap);

@@ -1,4 +1,6 @@
 bin/*
-build/*
+build*
 pack/*
+*.so
+*.dll
 *.7z
